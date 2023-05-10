@@ -1,0 +1,57 @@
+@layout('layouts/auth')
+@set('title', data.title)
+
+@section('content')
+<div class="login-box">
+  <div class="login-logo">
+    <a href="../../index2.html"><b>Admin</b>LTE</a>
+  </div>
+  <!-- /.login-logo -->
+  <div class="card">
+    <div class="card-body login-card-body">
+      <p class="login-box-msg">Sign in to start your session</p>
+
+      <form action="{{ route('login.check') }}" method="post">
+        {{ csrfField() }}
+        <div class="input-group mb-3">
+          <input type="email" name="email" class="form-control" placeholder="Email">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+        </div>
+        @if(flashMessages.has('errors.email'))
+          <p class="text text-danger">{{ flashMessages.get('errors.email[0]') }}</p>
+        @endif
+        <div class="input-group mb-3">
+          <input type="password" name="password" class="form-control" placeholder="Password">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        @if(flashMessages.has('errors.password'))
+          <p class="text text-danger">{{ flashMessages.get('errors.password[0]') }}</p>
+        @endif
+        @if(flashMessages.has('message'))
+          <p class="text text-danger">{{ flashMessages.get('message') }}</p>
+        @endif
+        <div class="social-auth-links text-center mb-3">
+          <button class="btn btn-block btn-primary">
+            Sign in
+          </button>
+        </div>
+      </form>
+
+      <p class="mb-1">
+        <a href="{{ route('forgot.password') }}">I forgot my password</a>
+      </p>
+
+    </div>
+    <!-- /.login-card-body -->
+  </div>
+</div>
+<!-- /.login-box -->
+@end
